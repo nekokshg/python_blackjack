@@ -18,9 +18,36 @@ class Deck:
         self.deck = []
         for suit in suits:
             for value in values:
-                for card_value in card_values:
-                    self.deck.append(Card(value, suit, card_values[value]))
+                self.deck.append(Card(value, suit, card_values[value]))
+    
+    def __str__(self):
+        deck_comp = ''
+        for card in self.deck:
+            deck_comp += '\n'+card.__str__()
+        return 'The deck has:' + deck_comp
+    
     def shuffle(self):
         random.shuffle(self.deck)
+    
     def deal(self):
-        pass
+        single_card = self.deck.pop()
+        return single_card
+
+class Hand:
+    def __init__(self):
+        self.cards = []
+        self.aces = 0
+        #self.value = 0
+
+    def add_card(self,card):
+        self.cards.append(card)
+        #self.value += values
+
+test_deck = Deck()
+test_deck.shuffle()
+test_player = Hand()
+test_player.add_card(test_deck.deal())
+test_player.add_card(test_deck.deal())
+
+for card in test_player.cards:
+    print(card)
